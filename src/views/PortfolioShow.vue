@@ -18,7 +18,7 @@ export default {
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/portfolios/1").then(response => {
+    axios.get("http://localhost:3000/api/portfolios/" + this.$route.params.id).then(response => {
       this.portfolio = response.data;
     });
   },

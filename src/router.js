@@ -16,7 +16,8 @@ export default new Router({
     { path: "/signup", name: "signup", component: Signup },
     { path: "/login", name: "login", component: Login },
     { path: "/logout", name: "logout", component: Logout },
-    { path: "/portfolio", name: "portfolio-show", component: Portfolio },
-    { path: "/crypto", name: "crypto-show", component: Crypto }
+    { path: "/portfolios/:id", name: "portfolio-show", component: Portfolio },
+    { path: "/companies/:id", name: "company-show", component: Company },
+    { path: "/cryptos/:id", name: "crypto-show", component: Crypto }
   ]
 });

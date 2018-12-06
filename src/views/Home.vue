@@ -1,9 +1,19 @@
 <template>
   <div class="home">
-    <p>{{ user.first_name }}</p>
-    <p>{{ user.portfolios }}</p>
-    <p>{{ user.companies }}</p>
-    <p>{{ user.cryptos }}</p>
+    <h3>Welcome, {{ user.first_name }}</h3>
+
+    <div v-for="portfolio in user.portfolios">
+      <a v-bind:href="`/#/portfolios/${portfolio.id}`" class="btn btn-primary mt-2">{{ portfolio.name }}</a>
+    </div>
+
+    <div v-for="company in user.companies">
+      <a v-bind:href="`/#/companies/${company.id}`" class="btn btn-primary mt-2">{{ company.name }}</a>
+    </div>
+    <div v-for="crypto in user.cryptos">
+      <a v-bind:href="`/#/cryptos/${crypto.id}`" class="btn btn-primary mt-2">{{ crypto.name }}</a>
+      <!-- Change href tag to direct to that crypto page -->
+      <!-- <p>{{ crypto.daily_price["2018-12-01"]["4a. close (USD)"] }}</p> -->
+    </div>
   </div>
 </template>
 
@@ -26,7 +36,7 @@ export default {
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/users/1").then(response => {
+    axios.get("http://localhost:3000/api/users/current_user").then(response => {
       this.user = response.data;
     });
   },
