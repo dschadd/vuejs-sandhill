@@ -1,7 +1,7 @@
 <template>
   <div class="crypto-show">
     <h1>{{ crypto.name }}</h1>
-
+    <h2>Followers: {{ crypto.followers.length }}</h2>
     <h3>Today's Price: ${{ crypto.daily_price["2018-12-04"]["4a. close (USD)"] }}</h3>
 
     <h3>NEWS</h3>

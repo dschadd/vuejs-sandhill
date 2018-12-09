@@ -2,17 +2,17 @@
   <div class="home">
     <h3>Welcome, {{ user.first_name }}</h3>
 
+    <div><a v-bind:href="`/#/newportfolio/`" class="btn btn-primary mt-2">Create Portfolio</a></div>
+
     <div v-for="portfolio in user.portfolios">
       <a v-bind:href="`/#/portfolios/${portfolio.id}`" class="btn btn-primary mt-2">{{ portfolio.name }}</a>
     </div>
 
     <div v-for="company in user.companies">
-      <a v-bind:href="`/#/companies/${company.id}`" class="btn btn-primary mt-2">{{ company.name }}</a>
+      <a v-bind:href="`/#/companies/${company.company_id}`" class="btn btn-primary mt-2">{{ company.company_name }}</a>
     </div>
     <div v-for="crypto in user.cryptos">
-      <a v-bind:href="`/#/cryptos/${crypto.id}`" class="btn btn-primary mt-2">{{ crypto.name }}</a>
-      <!-- Change href tag to direct to that crypto page -->
-      <!-- <p>{{ crypto.daily_price["2018-12-01"]["4a. close (USD)"] }}</p> -->
+      <a v-bind:href="`/#/cryptos/${crypto.crypto_id}`" class="btn btn-primary mt-2">{{ crypto.crypto_name }}</a>
     </div>
   </div>
 </template>

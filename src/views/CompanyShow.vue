@@ -2,7 +2,7 @@
   <div class="company-show">
     <h1>{{ company.name }}</h1>
     <h2>Followers: {{ company.followers.length }}</h2>
-    <h4>Today's Price: ${{ company.price["2018-12-04"]["4. close"] }}</h4>
+    <!-- <h4>Today's Price: ${{ company.price["2018-12-04"]["4. close"] }}</h4> -->
 
     <!--
       EXAMPLE OF VUE JS CODE FOR LOOPING THROUGH AN OBJECT
@@ -26,7 +26,7 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      company: {}
+      company: { price: "", followers: "" }
     };
   },
   created: function() {
