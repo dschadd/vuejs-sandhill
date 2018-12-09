@@ -1,9 +1,9 @@
 <template>
   <div class="portfolio-create">
     <h1>Create New Portfolio</h1>
-    Name: <input v-model="newPortfolioName" type="text" /> Company: <input v-model="newCompany" type="text" /> Shares:
-    <input v-model="newCompanyShares" type="text" /> Crypto: <input v-model="newCrypto" type="text" /> Count:
-    <input v-model="newCryptoCount" type="text" />
+    Name: <input v-model="newPortfolioName" type="text" /> Company ID:
+    <input v-model="newCompanyID" type="text" /> Shares: <input v-model="newCompanyShares" type="text" /> Crypto ID:
+    <input v-model="newCryptoID" type="text" /> Count: <input v-model="newCryptoCount" type="text" />
     <button v-on:click="createPortfolio();" class="btn btn-primary">Create</button>
   </div>
 </template>
@@ -17,9 +17,9 @@ export default {
   data: function() {
     return {
       newPortfolioName: "",
-      newCompany: "",
+      newCompanyID: "",
       newCompanyShares: 0,
-      newCrypto: "",
+      newCryptoID: "",
       newCryptoCount: 0,
       companies: [],
       cryptos: []
@@ -35,26 +35,26 @@ export default {
   },
   methods: {
     createPortfolio: function() {
-      console.log("createPortfolio");
+      console.log(this.newPortfolioName);
       this.errors = [];
-      var params = {
-        input_name: this.newPortfolioName
-        // input_company: this.newCompany,
-        // input_shares: this.newCompanyShares,
-        // input_crypto: this.newCrypto,
-        // input_count: this.newCryptoCount
+      var portfolioParams = {
+        name: this.newPortfolioName,
+        company_id: this.newCompanyID,
+        shares: this.newCompanyShares,
+        crypto_id: this.newCryptoID,
+        count: this.newCryptoCount
       };
       axios
-        .post("http://localhost:3000/api/portfolios", params)
+        .post("http://localhost:3000/api/portfolios", portfolioParams)
         .then(
           function(response) {
             console.log(response);
             this.newPortfolioName = "";
-            // this.newCompany = "";
-            // this.newCompanyShares = "";
-            // this.newCrypto = "";
-            // this.newCryptoCount = "";
-            this.$router.push("/");
+            this.newCompanyID = "";
+            this.newCompanyShares = "";
+            this.newCrypto = "";
+            this.newCryptoCount = "";
+            //       this.$router.push("/");
           }.bind(this)
         )
         .catch(
