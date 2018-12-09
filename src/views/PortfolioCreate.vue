@@ -1,8 +1,7 @@
 <template>
   <div class="portfolio-create">
     <h1>Create New Portfolio</h1>
-    Name: <input v-model="newPortfolioName" type="text" /> Private:
-    <input v-model="newPortfolioPrivacy" type="text" /> Company: <input v-model="newCompany" type="text" /> Shares:
+    Name: <input v-model="newPortfolioName" type="text" /> Company: <input v-model="newCompany" type="text" /> Shares:
     <input v-model="newCompanyShares" type="text" /> Crypto: <input v-model="newCrypto" type="text" /> Count:
     <input v-model="newCryptoCount" type="text" />
     <button v-on:click="createPortfolio();" class="btn btn-primary">Create</button>
@@ -18,7 +17,6 @@ export default {
   data: function() {
     return {
       newPortfolioName: "",
-      newPortfolioPrivacy: "",
       newCompany: "",
       newCompanyShares: 0,
       newCrypto: "",
@@ -40,20 +38,22 @@ export default {
       console.log("createPortfolio");
       this.errors = [];
       var params = {
-        input_title: this.newRecipeName,
-        input_chef: this.newRecipeChef,
-        input_ingredients: this.newRecipeIngredients,
-        input_directions: this.newRecipeDirections
+        input_name: this.newPortfolioName
+        // input_company: this.newCompany,
+        // input_shares: this.newCompanyShares,
+        // input_crypto: this.newCrypto,
+        // input_count: this.newCryptoCount
       };
       axios
-        .post("http://localhost:3000/api/recipes", params)
+        .post("http://localhost:3000/api/portfolios", params)
         .then(
           function(response) {
             console.log(response);
-            this.newRecipeName = "";
-            this.newRecipeChef = "";
-            this.newRecipeIngredients = "";
-            this.newRecipeDirections = "";
+            this.newPortfolioName = "";
+            // this.newCompany = "";
+            // this.newCompanyShares = "";
+            // this.newCrypto = "";
+            // this.newCryptoCount = "";
             this.$router.push("/");
           }.bind(this)
         )
