@@ -2,7 +2,7 @@
   <div class="home">
     <h3>Welcome, {{ user.first_name }}</h3>
 
-    <div><a v-bind:href="`/#/newportfolio/`" class="btn btn-primary mt-2">Create Portfolio</a></div>
+    <div><a href="/#/portfolios/create" class="btn btn-primary mt-2">Create Portfolio</a></div>
 
     <div v-for="portfolio in user.portfolios">
       <a v-bind:href="`/#/portfolios/${portfolio.id}`" class="btn btn-primary mt-2">{{ portfolio.name }}</a>
