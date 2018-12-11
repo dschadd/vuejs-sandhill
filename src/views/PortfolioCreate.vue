@@ -1,9 +1,23 @@
 <template>
   <div class="portfolio-create">
     <h1>Create New Portfolio</h1>
-    Name: <input v-model="newPortfolioName" type="text" /> Company ID:
-    <input v-model="newCompanyID" type="text" /> Shares: <input v-model="newCompanyShares" type="text" /> Crypto ID:
-    <input v-model="newCryptoID" type="text" /> Count: <input v-model="newCryptoCount" type="text" />
+    Name: <input v-model="newPortfolioName" type="text" />
+
+    <div class="form-group">
+      <label for="companyName">Company Name</label>
+      <select v-model="newCompanyID" class="form-control" id="companyName">
+        <option v-for="company in companies" v-bind:value="company.id"> {{ company.name }} </option>
+      </select>
+    </div>
+    Shares: <input v-model="newCompanyShares" type="text" />
+    <div class="form-group">
+      <label for="cryptoName">Crypto Name</label>
+      <select v-model="newCryptoID" class="form-control" id="cryptoName">
+        <option v-for="crypto in cryptos" v-bind:value="crypto.id"> {{ crypto.name }} </option>
+      </select>
+    </div>
+
+    Count: <input v-model="newCryptoCount" type="text" />
     <button v-on:click="createPortfolio();" class="btn btn-primary">Create</button>
   </div>
 </template>
