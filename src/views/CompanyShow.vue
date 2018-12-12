@@ -26,7 +26,7 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      company: { price: "", followers: "" }
+      company: { today_price: "", followers: [], name: "", news: [] }
     };
   },
   created: function() {

@@ -3,7 +3,6 @@
     <h1>{{ crypto.name }}</h1>
     <h2>Followers: {{ crypto.followers.length }}</h2>
     <h3>Today's Price: ${{ crypto.today_price }}</h3>
-
     <h3>NEWS</h3>
     <div v-for="newsItem in crypto.news">
       <a :href="newsItem.url" target="_blank">{{ newsItem.title }}</a>
@@ -19,7 +18,7 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      crypto: {}
+      crypto: { today_price: "", followers: [], news: [], name: "" }
     };
   },
   created: function() {
