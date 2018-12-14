@@ -4,7 +4,7 @@
       <h1 class="my-4">
         {{ company.name }} <small>${{ company.today_price }}</small>
       </h1>
-
+      <canvas id="myChart" width="400" height="400"></canvas>
       <h2>Followers: {{ company.followers.length }}</h2>
 
       <!--
@@ -41,7 +41,9 @@
 <style></style>
 
 <script>
+/* global Chart */
 import axios from "axios";
+// import { Chart } from "vue-chartjs";
 
 export default {
   data: function() {
@@ -53,9 +55,57 @@ export default {
     axios.get("http://localhost:3000/api/companies/" + this.$route.params.id).then(response => {
       this.company = response.data;
       console.log(this.company.price);
+
+      var dates = [];
+      var prices = [];
+
+      for (var dkey in this.company.price) {
+        dates.push(dkey);
+      }
+      console.log(dates);
+
+      for (var pkey in this.company.price) {
+        var pobj = this.company.price[pkey];
+        prices.push(pobj["4. close"]);
+      }
+
+      var self = this;
+      setTimeout(function() {
+        var ctx = document.getElementById("myChart").getContext("2d");
+        self.fillData(ctx, dates, prices);
+      }, 0);
     });
   },
-  methods: {},
+  mounted() {
+    console.log("mounted");
+  },
+  methods: {
+    fillData: function(ctx, dates, prices) {
+      var myChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: dates,
+          datasets: [
+            {
+              label: "Price",
+              data: prices
+            }
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true
+                }
+              }
+            ]
+          }
+        }
+      });
+    }
+  },
   computed: {}
 };
 </script>

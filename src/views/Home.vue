@@ -40,17 +40,14 @@
           >
         </div>
       </div>
-    </div>
-
-    <!--
-      <div v-for="company in user.companies">
-        <a v-bind:href="`/#/companies/${company.company_id}`" class="btn btn-secondary mt-2">{{
-          company.company_name
-        }}</a>
+      <div v-for="crypto in user.cryptos" class="col-md-4 mt-4">
+        <img class="card-img-top" src="http://placehold.it/500x325" alt="Article Image" />
+        <div class="card-body">
+          <h5 class="card-title">{{ crypto.name }}</h5>
+          <p class="card-text">Test</p>
+          <a v-bind:href="`/#/cryptos/${crypto.crypto_id}`" target="_blank" class="btn btn-secondary">Keep Reading</a>
+        </div>
       </div>
-    -->
-    <div v-for="crypto in user.cryptos">
-      <a v-bind:href="`/#/cryptos/${crypto.crypto_id}`" class="btn btn-secondary mt-2">{{ crypto.crypto_name }}</a>
     </div>
   </div>
 </template>
