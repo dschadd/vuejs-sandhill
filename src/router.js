@@ -6,8 +6,8 @@ import Login from "./views/Login.vue";
 import Logout from "./views/Logout.vue";
 import PortfolioCreate from "./views/PortfolioCreate.vue";
 import PortfolioShow from "./views/PortfolioShow.vue";
-import CompanyShow from "./views/CompanyShow.vue";
 import CompanyIndex from "./views/CompanyIndex.vue";
+import CompanyShow from "./views/CompanyShow.vue";
 import CryptoShow from "./views/CryptoShow.vue";
 // import CryptoIndex from "./views/CryptoIndex.vue";
 
@@ -21,8 +21,8 @@ export default new Router({
         { path: "/logout", name: "logout", component: Logout },
         { path: "/portfolios/create", name: "portfolio-create", component: PortfolioCreate },
         { path: "/portfolios/:id", name: "portfolio-show", component: PortfolioShow },
-        { path: "/companies/:id", name: "company-show", component: CompanyShow },
         { path: "/companies", name: "company-index", component: CompanyIndex },
+        { path: "/companies/:id", name: "company-show", component: CompanyShow },
         { path: "/cryptos/:id", name: "crypto-show", component: CryptoShow }
         // { path: "/cryptos/", name: "crypto-index", component: CryptoIndex },
     ]

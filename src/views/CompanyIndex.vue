@@ -1,11 +1,17 @@
 <template>
   <div class="company-index">
-    <div v-for="company in companies">
-      <div class="card border-secondary mb-3" style="width: 18rem;">
-        <img class="card-img-top" src="https://www.brandeps.com/logo-download/A/Apple-02.png" alt="Card image cap" />
-        <div class="card-body">
-          <h5 class="card-title">{{ company.name }}</h5>
-          <a href="#" class="btn btn-secondary">Visit Company Page</a>
+    <div class="row">
+      <div v-for="company in companies" class="col-md-4 mt-2">
+        <div class="card border-secondary">
+          <img
+            class="card-img-top"
+            src="https://image.freepik.com/free-icon/apple-logo_318-40184.jpg"
+            alt="Company logo"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ company.name }}</h5>
+            <a v-bind:href="`/#/companies/${company.id}`" class="btn btn-secondary">Visit Company Page</a>
+          </div>
         </div>
       </div>
     </div>
@@ -24,9 +30,16 @@ export default {
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/companies").then(response => {
-      this.companies = response.data;
-    });
+    axios
+      .get("http://localhost:3000/api/companies")
+      .then(response => {
+        this.companies = response.data;
+        localStorage.setItem("companies", JSON.stringify(this.companies));
+      })
+      .catch(error => {
+        console.log("Error, loading from localStorage", error);
+        this.companies = JSON.parse(localStorage.getItem("companies"));
+      });
   },
   methods: {},
   computed: {}
