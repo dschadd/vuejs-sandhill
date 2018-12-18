@@ -8,8 +8,8 @@ import PortfolioCreate from "./views/PortfolioCreate.vue";
 import PortfolioShow from "./views/PortfolioShow.vue";
 import CompanyIndex from "./views/CompanyIndex.vue";
 import CompanyShow from "./views/CompanyShow.vue";
+import CryptoIndex from "./views/CryptoIndex.vue";
 import CryptoShow from "./views/CryptoShow.vue";
-// import CryptoIndex from "./views/CryptoIndex.vue";
 
 Vue.use(Router);
 
@@ -23,7 +23,7 @@ export default new Router({
         { path: "/portfolios/:id", name: "portfolio-show", component: PortfolioShow },
         { path: "/companies", name: "company-index", component: CompanyIndex },
         { path: "/companies/:id", name: "company-show", component: CompanyShow },
+        { path: "/cryptos/", name: "crypto-index", component: CryptoIndex },
         { path: "/cryptos/:id", name: "crypto-show", component: CryptoShow }
-        // { path: "/cryptos/", name: "crypto-index", component: CryptoIndex },
     ]
 });
