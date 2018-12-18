@@ -75,7 +75,8 @@ export default {
   },
   methods: {
     addFollow: function() {
-      post;
+      var followParams;
+      axios.post("http://localhost:3000/api/company_follows");
     },
 
     setupChart: function() {
