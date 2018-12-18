@@ -37,10 +37,18 @@ export default {
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/portfolios/" + this.$route.params.id).then(response => {
-      this.portfolio = response.data;
-      this.portfolio_id = this.portfolio.id;
-    });
+    var portfolioKey = `portfolio-${this.$route.params.id}`;
+    axios
+      .get("http://localhost:3000/api/portfolios/" + this.$route.params.id)
+      .then(response => {
+        this.portfolio = response.data;
+        this.portfolio_id = this.portfolio.id;
+        localStorage.setItem(portfolioKey, JSON.stringify(this.portfolio));
+      })
+      .catch(error => {
+        console.log("error, using localStorage", error);
+        this.portfolio = JSON.parse(localStorage.getItem(portfolioKey));
+      });
   },
   mounted() {
     var self = this;

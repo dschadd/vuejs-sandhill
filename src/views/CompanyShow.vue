@@ -8,7 +8,8 @@
       <canvas id="myChart" width="400" height="400"></canvas>
       <div>
         <h2>Followers: {{ company.followers.length }}</h2>
-        <a href="" class="btn btn-secondary">Follow</a>
+        <button v-on:click="addFollow();" class="btn btn-primary">Follow</button>
+        <!-- <a href="" class="btn btn-secondary">Follow</a> -->
       </div>
       <!--
         EXAMPLE OF VUE JS CODE FOR LOOPING THROUGH AN OBJECT
@@ -74,11 +75,6 @@ export default {
     console.log("mounted");
   },
   methods: {
-    addFollow: function() {
-      var followParams;
-      axios.post("http://localhost:3000/api/company_follows");
-    },
-
     setupChart: function() {
       var dates = [];
       var prices = [];
@@ -123,6 +119,11 @@ export default {
           }
         }
       });
+    },
+    addFollow: function() {
+      console.log("this worked");
+      var followParams = { company_id: this.$route.params.id, follow: true };
+      axios.post("http://localhost:3000/api/company_follows", followParams);
     }
   },
   computed: {}
