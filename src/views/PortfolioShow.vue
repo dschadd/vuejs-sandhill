@@ -72,6 +72,9 @@ export default {
         options: {}
       });
     }
+
+    // calculateAssets: function() {
+    //   var companyAssets =
   },
   computed: {}
 };

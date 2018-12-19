@@ -1,25 +1,13 @@
-<!--
-  <template>
-    <div class="crypto-show">
-      <h1></h1>
-      <h2>Followers: </h2>
-      <h3>Today's Price: $</h3>
-      <h3>NEWS</h3>
-      <div v-for="newsItem in crypto.news">
-        <a :href="newsItem.url" target="_blank">{{ newsItem.title }}</a>
-      </div>
-    </div>
-  </template>
--->
-
 <template>
-  <div class="company-show">
-    <div class="container">
+  <div class="crypto-show">
+    <div v-if="crypto.loading" class="container"><p>Loading...</p></div>
+    <div v-else class="container"></div>
       <h1 class="my-4">
-        {{ crypto.name }} <small>${{ crypto.today_price }}</small>
+        {{ crypto.name }} <small>Today's price: ${{ crypto.today_price }}</small>
       </h1>
-
+      <canvas id="myChart" width="400" height="400"></canvas>
       <h2>Followers: {{ crypto.followers.length }}</h2>
+      <button v-on:click="addFollow();" class="btn btn-primary">Follow</button>
 
       <!--
         EXAMPLE OF VUE JS CODE FOR LOOPING THROUGH AN OBJECT
@@ -49,27 +37,97 @@
         </div>
       </div>
     </div>
+ 
   </div>
 </template>
 
 <style></style>
 
 <script>
+/* global Chart */
 import axios from "axios";
 
 export default {
   data: function() {
     return {
-      crypto: { today_price: "", followers: [], news: [], name: "" }
+      crypto: { loading: true, today_price: "", followers: [], news: [], name: "" }
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/cryptos/" + this.$route.params.id).then(response => {
-      console.log(response.data);
-      this.crypto = response.data;
-    });
+    var cryptoKey = `crypto-${this.$route.params.id}`;
+    axios.get("http://localhost:3000/api/cryptos/" + this.$route.params.id)
+      .then(response => {
+        console.log(response.data);
+        this.crypto = response.data;
+        this.setupChart();
+        // localStorage.setItem(cryptoKey, JSON.stringify(this.company));
+      });
+    // .catch(error => {
+    //   console.log("error, using localStorage", error);
+    //   this.crypto = JSON.parse(localStorage.getItem(cryptoKey));
+    //   this.setupChart();
+    // });
   },
-  methods: {},
+  methods: {
+    setupChart: function() {
+      var dates = [];
+      var prices = [];
+
+      for (var dkey in this.crypto.price) {
+        dates.push(dkey);
+      }
+      console.log(dates);
+      var datesIndex = dates.length - 1;
+      var orderedDates = [];
+      while (datesIndex > 0) {
+        orderedDates.push(dates[datesIndex]);
+        datesIndex = datesIndex - 1;
+      }
+
+      for (var pkey in this.crypto.price) {
+        var pobj = this.crypto.price[pkey];
+        prices.push(pobj["4a. close (USD)"]);
+      }
+      console.log(prices);
+      var pricesIndex = prices.length - 1;
+      var orderedPrices = [];
+      while (pricesIndex > 0) {
+        orderedPrices.push(prices[pricesIndex]);
+        pricesIndex = pricesIndex - 1;
+      }
+
+      var self = this;
+      setTimeout(function() {
+        var ctx = document.getElementById("myChart").getContext("2d");
+        self.fillData(ctx, orderedDates, orderedPrices);
+      }, 0);
+    },
+    fillData: function(ctx, orderedDates, orderedPrices) {
+      var myChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: orderedDates,
+          datasets: [
+            {
+              label: "Price",
+              data: orderedPrices
+            }
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true
+                }
+              }
+            ]
+          }
+        }
+      });
+    }
+  },
   computed: {}
 };
 </script>

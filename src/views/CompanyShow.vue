@@ -1,9 +1,11 @@
 <template>
   <div class="company-show">
-    <div v-if="company.loading" class="container"><p>Loading...</p></div>
+    <div v-if="company.loading" class="container">
+      <img src="https://cdn-images-1.medium.com/max/1600/0*cWpsf9D3g346Va20.gif" alt="" />
+    </div>
     <div v-else class="container">
       <h1 class="my-4">
-        {{ company.name }} <small>${{ company.today_price }}</small>
+        {{ company.name }} <small>Today's price${{ company.today_price }}</small>
       </h1>
       <canvas id="myChart" width="400" height="400"></canvas>
       <div>
@@ -83,27 +85,40 @@ export default {
         dates.push(dkey);
       }
       console.log(dates);
+      var datesIndex = dates.length - 1;
+      var orderedDates = [];
+      while (datesIndex > 0) {
+        orderedDates.push(dates[datesIndex]);
+        datesIndex = datesIndex - 1;
+      }
+      console.log(orderedDates);
 
       for (var pkey in this.company.price) {
         var pobj = this.company.price[pkey];
         prices.push(pobj["4. close"]);
       }
+      var pricesIndex = prices.length - 1;
+      var orderedPrices = [];
+      while (pricesIndex > 0) {
+        orderedPrices.push(prices[pricesIndex]);
+        pricesIndex = pricesIndex - 1;
+      }
 
       var self = this;
       setTimeout(function() {
         var ctx = document.getElementById("myChart").getContext("2d");
-        self.fillData(ctx, dates, prices);
+        self.fillData(ctx, orderedDates, orderedPrices);
       }, 0);
     },
-    fillData: function(ctx, dates, prices) {
+    fillData: function(ctx, orderedDates, orderedPrices) {
       var myChart = new Chart(ctx, {
         type: "line",
         data: {
-          labels: dates,
+          labels: orderedDates,
           datasets: [
             {
               label: "Price",
-              data: prices
+              data: orderedPrices
             }
           ]
         },

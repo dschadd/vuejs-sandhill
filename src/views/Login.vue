@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login" id="login-page">
     <div class="container">
       <form v-on:submit.prevent="submit();">
         <h1>Login</h1>
@@ -15,6 +15,14 @@
     </div>
   </div>
 </template>
+
+<style>
+#login-page {
+  background-image: url("http://yesofcorsa.com/wp-content/uploads/2016/03/831202_road.jpg");
+  background-size: cover;
+  height: 100vh;
+}
+</style>
 
 <script>
 import axios from "axios";
