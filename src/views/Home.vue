@@ -65,7 +65,12 @@ export default {
       newPortfolioName: "",
       newPortfolioPrivate: false,
       newPortfolioCompany: "",
-      newPortfolioCrypto: ""
+      newPortfolioCrypto: "",
+      portfolioImages: [
+        "https://i.imgur.com/WUyab8a.jpg",
+        "https://i.imgur.com/3EHUHoZ.jpg",
+        "https://i.imgur.com/Ufxmsle.jpg"
+      ]
     };
   },
   created: function() {

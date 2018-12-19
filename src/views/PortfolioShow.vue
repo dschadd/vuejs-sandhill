@@ -33,7 +33,10 @@ export default {
   data: function() {
     return {
       portfolio: {},
-      portfolio_id: ""
+      portfolio_id: "",
+      companyAssets: "",
+      cryptoAssets: "",
+      currentCash: ""
     };
   },
   created: function() {
@@ -53,6 +56,7 @@ export default {
   mounted() {
     var self = this;
     setTimeout(function() {
+      // this.calculateAssets();
       self.createChart();
     }, 5000);
   },
@@ -67,14 +71,25 @@ export default {
               data: [10, 20, 30]
             }
           ],
-          labels: ["Red", "Yellow", "Blue"]
+          labels: ["Ethereum", "Tesla", "Cash"]
         },
         options: {}
       });
     }
-
     // calculateAssets: function() {
-    //   var companyAssets =
+    //   if (this.portfolio.companies[0].portfolio_data.portfolio_id === this.portfolio_id) {
+    //     var companyAssets =
+    //       this.portfolio.companies[0].portfolio_data.shares * this.portfolio.companies[0].portfolio_data.purchase_price;
+    //   }
+    //   if (this.portfolio.cryptos[0].portfolio_data.portfolio_id === this.portfolio_id) {
+    //     var cryptoAssets =
+    //       this.portfolio.cryptos[0].portfolio_data.shares * this.portfolio.cryptos[0].portfolio_data.purchase_price;
+    //   }
+    //   var currentCash = this.portfolio.initial_cash - companyAssets - cryptoAssets;
+    //   var chartData = [];
+    //   chartData.push(companyAssets, cryptoAssets, currentCash);
+    //   return chartData;
+    // }
   },
   computed: {}
 };

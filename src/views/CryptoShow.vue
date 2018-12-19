@@ -66,7 +66,7 @@ export default {
     //   console.log("error, using localStorage", error);
     //   this.crypto = JSON.parse(localStorage.getItem(cryptoKey));
     //   this.setupChart();
-    // });
+    // });-
   },
   methods: {
     setupChart: function() {

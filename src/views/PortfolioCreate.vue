@@ -1,6 +1,9 @@
 <template>
   <div class="portfolio-create">
-    <h1>Create New Portfolio</h1>
+    <header class="jumbotron my-4">
+      <h1 class="display-3">Create a new portfolio</h1>
+      <p class="lead">Develop a portfolio of companies to begin your journey to achieve your financial goals.</p>
+    </header>
     Name: <input v-model="newPortfolioName" type="text" /> Cash: <input v-model="newInitialCash" type="number" />
     <div class="form-group">
       <label for="companyName">Company Name</label>
