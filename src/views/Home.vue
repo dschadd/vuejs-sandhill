@@ -1,5 +1,8 @@
 <template>
-  <div class="home">
+  <div v-if="user.loading" class="container">
+    <img src="https://cdn-images-1.medium.com/max/1600/0*cWpsf9D3g346Va20.gif" alt="" />
+  </div>
+  <div v-else class="home" id="home">
     <header class="jumbotron my-4">
       <h1 class="display-3">Welcome, {{ user.first_name }}</h1>
       <p class="lead">
@@ -50,7 +53,12 @@
   </div>
 </template>
 
-<style></style>
+<style>
+/*#home {
+  background-image: url("https://i.imgur.com/Wjp2g9D.jpg");
+  background-size: cover;
+}*/
+</style>
 
 <script>
 import axios from "axios";
@@ -59,7 +67,7 @@ export default {
   data: function() {
     return {
       message: "Welcome to Vue.js!!!!!",
-      user: {},
+      user: { loading: true },
       companies: [],
       cryptos: [],
       newPortfolioName: "",

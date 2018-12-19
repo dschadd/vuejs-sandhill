@@ -4,14 +4,11 @@
       <img src="https://cdn-images-1.medium.com/max/1600/0*cWpsf9D3g346Va20.gif" alt="" />
     </div>
     <div v-else class="container">
-      <h1 class="my-4">
-        {{ company.name }} <small>Today's price${{ company.today_price }}</small>
-      </h1>
-      <canvas id="myChart" width="400" height="400"></canvas>
-      <div>
-        <h2>Followers: {{ company.followers.length }}</h2>
-        <button v-on:click="addFollow();" class="btn btn-primary">Follow</button>
-        <!-- <a href="" class="btn btn-secondary">Follow</a> -->
+      <div class="row">
+        <h1 class="my-4">
+          {{ company.name }}<small> Followers: {{ company.followers.length }}</small>
+        </h1>
+        <button v-on:click="addFollow();" class="btn btn-primary ml-4">Follow</button>
       </div>
       <!--
         EXAMPLE OF VUE JS CODE FOR LOOPING THROUGH AN OBJECT
@@ -21,11 +18,12 @@
       -->
 
       <div v-if="company.news && company.news.length > 0" class="row">
-        <div class="col-md-8"><img class="img-fluid" v-bind:src="company.news[0].urlToImage" alt="" /></div>
-        <div class="col-md-4">
-          <h3 class="my-3">{{ company.news[0].title }}</h3>
+        <div class="col-md-6"><img class="img-fluid" v-bind:src="company.news[0].urlToImage" alt="" /></div>
+        <div class="col-md-2">
+          <h4 class="my-3">{{ company.news[0].title }}</h4>
           <p>{{ company.news[0].description }}</p>
         </div>
+        <div class="col-md-4"><canvas id="myChart" width="400" height="400"></canvas></div>
       </div>
 
       <div class="row">
@@ -118,7 +116,8 @@ export default {
           datasets: [
             {
               label: "Price",
-              data: orderedPrices
+              data: orderedPrices,
+              backgroundColor: "rgba(173, 216, 230, 1)"
             }
           ]
         },

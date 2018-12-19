@@ -1,31 +1,105 @@
 <template>
-  <div class="portfolio-create">
+  <div class="portfolio-create" id="portfolio-create">
     <header class="jumbotron my-4">
       <h1 class="display-3">Create a new portfolio</h1>
       <p class="lead">Develop a portfolio of companies to begin your journey to achieve your financial goals.</p>
     </header>
-    Name: <input v-model="newPortfolioName" type="text" /> Cash: <input v-model="newInitialCash" type="number" />
-    <div class="form-group">
-      <label for="companyName">Company Name</label>
-      <select v-model="newCompanyID" class="form-control" id="companyName">
-        <option v-for="company in companies" v-bind:value="company.id"> {{ company.name }} </option>
-      </select>
+    <form>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="formGroupExampleInput">Portfolio Name</label>
+            <input
+              v-model="newPortfolioName"
+              type="text"
+              class="form-control"
+              id="formGroupExampleInput"
+              placeholder="Name"
+            />
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Initial Investment</label>
+            <input
+              v-model="newInitialCash"
+              type="number"
+              class="form-control"
+              id="formGroupExampleInput2"
+              placeholder="10000"
+            />
+          </div>
+        </div>
+      </div>
+    </form>
+    <!--
+      Name: <input v-model="newPortfolioName" type="text" /> Cash: <input v-model="newInitialCash" type="number" />
+    -->
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="companyName">Company Name</label>
+          <select v-model="newCompanyID" class="form-control" id="companyName">
+            <option v-for="company in companies" v-bind:value="company.id"> {{ company.name }} </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Shares</label>
+          <input
+            v-model="newCompanyShares"
+            type="number"
+            class="form-control"
+            id="formGroupExampleInput2"
+            placeholder="10"
+          />
+        </div>
+      </div>
     </div>
-    Shares: <input v-model="newCompanyShares" type="number" />
-    <div class="form-group">
-      <label for="cryptoName">Crypto Name</label>
-      <select v-model="newCryptoID" class="form-control" id="cryptoName">
-        <option v-for="crypto in cryptos" v-bind:value="crypto.id"> {{ crypto.name }} </option>
-      </select>
+    <!-- Shares: <input v-model="newCompanyShares" type="number" /> -->
+
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="cryptoName">Crypto Name</label>
+          <select v-model="newCryptoID" class="form-control" id="cryptoName">
+            <option v-for="crypto in cryptos" v-bind:value="crypto.id"> {{ crypto.name }} </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Amount</label>
+          <input
+            v-model="newCryptoCount"
+            type="number"
+            class="form-control"
+            id="formGroupExampleInput2"
+            placeholder="10"
+          />
+        </div>
+      </div>
     </div>
 
-    Count: <input v-model="newCryptoCount" type="number" />
+    <!-- Count: <input v-model="newCryptoCount" type="number" /> -->
     <!-- <input v-model="private" type="checkbox" value="true" /> Private<br /> -->
     <button v-on:click="createPortfolio();" class="btn btn-primary">Create</button>
   </div>
 </template>
 
-<style></style>
+<style>
+#portfolio-create {
+  background-image: url("https://i.imgur.com/WyItSYP.jpg");
+  background-size: cover;
+  height: 100vh;
+}
+</style>
 
 <script>
 import axios from "axios";
@@ -85,6 +159,7 @@ export default {
             this.errors = error.response.data.errors;
           }.bind(this)
         );
+      this.$route.push("/");
     }
   },
   computed: {}
