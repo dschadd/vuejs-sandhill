@@ -1,43 +1,49 @@
 <template>
   <div class="crypto-show">
-    <div v-if="crypto.loading" class="container"><p>Loading...</p></div>
-    <div v-else class="container"></div>
-      <h1 class="my-4">
-        {{ crypto.name }} <small>Today's price: ${{ crypto.today_price }}</small>
-      </h1>
-      <canvas id="myChart" width="400" height="400"></canvas>
-      <h2>Followers: {{ crypto.followers.length }}</h2>
-      <button v-on:click="addFollow();" class="btn btn-primary">Follow</button>
-
-      <!--
-        EXAMPLE OF VUE JS CODE FOR LOOPING THROUGH AN OBJECT
-        <div v-for="(prices, date) in company.price">
-          <h4>Today's Price: {{ prices["4. close"] }}</h4>
-        </div>
-      -->
-
+    <div v-if="crypto.loading" class="container">
+      <img src="https://cdn-images-1.medium.com/max/1600/0*cWpsf9D3g346Va20.gif" alt="" />
+    </div>
+    <div v-else class="container">
       <div class="row">
-        <div class="col-md-8"><img class="img-fluid" v-bind:src="crypto.news[0].urlToImage" alt="" /></div>
-        <div class="col-md-4">
-          <h3 class="my-3">{{ crypto.news[0].title }}</h3>
-          <p>{{ crypto.news[0].description }}</p>
+        <h1 class="my-4">
+          {{ crypto.name }} <small>Followers: {{ crypto.followers.length }}</small>
+        </h1>
+        <small><button v-on:click="addFollow();" class="btn btn-info ml-2 mt-4">Follow</button></small>
         </div>
-      </div>
+        <!--
+          EXAMPLE OF VUE JS CODE FOR LOOPING THROUGH AN OBJECT
+          <div v-for="(prices, date) in company.price">
+            <h4>Today's Price: {{ prices["4. close"] }}</h4>
+          </div>
+        -->
 
-      <div class="row">
-        <div v-for="newsItem in crypto.news" class="col-md-4 mt-4">
-          <div class="card">
-            <img class="card-img-top" v-bind:src="newsItem.urlToImage" alt="Article Image" />
-            <div class="card-body">
-              <h5 class="card-title">{{ newsItem.title }}</h5>
-              <p class="card-text">{{ newsItem.description }}</p>
-              <a v-bind:href="newsItem.url" target="_blank" class="btn btn-secondary">Keep Reading</a>
+        <div class="row">
+          <div class="col-md-6">
+            <img class="img-fluid" v-bind:src="crypto.news[0].urlToImage" alt="" />
+          </div>
+          <div class="col-md-2">
+            <h4 class="my-3">{{ crypto.news[0].title }}</h4>
+            <p>{{ crypto.news[0].description }}</p>
+          </div>
+          <div class="col-md-4">
+            <canvas id="myChart" width="400" height="400"></canvas>
+          </div>
+        </div>
+
+        <div class="row">
+          <div v-for="newsItem in crypto.news" class="col-md-4 mt-4">
+            <div class="card">
+              <img class="card-img-top" v-bind:src="newsItem.urlToImage" alt="Article Image" />
+              <div class="card-body">
+                <h5 class="card-title">{{ newsItem.title }}</h5>
+                <p class="card-text">{{ newsItem.description }}</p>
+                <a v-bind:href="newsItem.url" target="_blank" class="btn btn-secondary">Keep Reading</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
- 
+ </div>
   </div>
 </template>
 
@@ -110,16 +116,27 @@ export default {
           datasets: [
             {
               label: "Price",
-              data: orderedPrices
+              data: orderedPrices,
+              pointRadius: 1,
+              backgroundColor: "rgba(173, 216, 230, 1)"
             }
           ]
         },
         options: {
+          legend: {
+            display: false
+          },
           scales: {
             yAxes: [
               {
                 ticks: {
-                  beginAtZero: true
+                }
+              }
+            ],
+            xAxes: [
+              {
+                gridLines: {
+                  display: false
                 }
               }
             ]
