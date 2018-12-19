@@ -5,11 +5,12 @@
     </div>
     <div v-else class="container">
       <div class="row">
-        <h1 class="my-4">
+        <h1 class="my-4 ml-3">
           {{ company.name }}<small> Followers: {{ company.followers.length }}</small>
         </h1>
-        <button v-on:click="addFollow();" class="btn btn-primary ml-4">Follow</button>
+        <small><button v-on:click="addFollow();" class="btn btn-info ml-2 mt-4">Follow</button></small>
       </div>
+
       <!--
         EXAMPLE OF VUE JS CODE FOR LOOPING THROUGH AN OBJECT
         <div v-for="(prices, date) in company.price">
@@ -17,7 +18,7 @@
         </div>
       -->
 
-      <div v-if="company.news && company.news.length > 0" class="row">
+      <div v-if="company.news && company.news.length > 0" class="row mt-4">
         <div class="col-md-6"><img class="img-fluid" v-bind:src="company.news[0].urlToImage" alt="" /></div>
         <div class="col-md-2">
           <h4 class="my-3">{{ company.news[0].title }}</h4>
@@ -98,6 +99,7 @@ export default {
       var pricesIndex = prices.length - 1;
       var orderedPrices = [];
       while (pricesIndex > 0) {
+        var formattedPrice = "";
         orderedPrices.push(prices[pricesIndex]);
         pricesIndex = pricesIndex - 1;
       }
@@ -117,16 +119,26 @@ export default {
             {
               label: "Price",
               data: orderedPrices,
+              pointRadius: 1,
               backgroundColor: "rgba(173, 216, 230, 1)"
             }
           ]
         },
         options: {
+          legend: {
+            display: false
+          },
+
           scales: {
             yAxes: [
               {
-                ticks: {
-                  beginAtZero: true
+                ticks: {}
+              }
+            ],
+            xAxes: [
+              {
+                gridLines: {
+                  display: false
                 }
               }
             ]
