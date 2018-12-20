@@ -3,11 +3,7 @@
     <div class="row">
       <div v-for="company in companies" class="col-md-4 mt-2">
         <div class="card border-secondary">
-          <img
-            class="card-img-top"
-            src="https://image.freepik.com/free-icon/apple-logo_318-40184.jpg"
-            alt="Company logo"
-          />
+          <img class="card-img-top" v-bind:src="company.image" alt="Company logo" />
           <div class="card-body">
             <h5 class="card-title">{{ company.name }}</h5>
             <a v-bind:href="`/#/companies/${company.id}`" class="btn btn-secondary">Visit Company Page</a>

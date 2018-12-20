@@ -11,7 +11,12 @@
         <div class="col-md-4 mt-4">
           <div v-for="company in portfolio.companies[0].portfolio_data">
             <div v-if="company.portfolio_id === portfolio_id">
-              <img class="card-img-top" src="http://placehold.it/500x325" alt="Article Image" />
+              <img
+                class="card-img-top"
+                v-bind:src="portfolio.companies[0].company_image"
+                alt="Article Image"
+                height="300"
+              />
               <div class="card-body">
                 <h5 class="card-title">{{ portfolio.companies[0].company_name }}</h5>
                 <p class="card-text">Shares: {{ company.shares }}</p>
@@ -25,7 +30,12 @@
         <div class="col-md-4 mt-4">
           <div v-for="crypto in portfolio.cryptos[0].portfolio_data">
             <div v-if="crypto.portfolio_id === portfolio_id">
-              <img class="card-img-top" src="http://placehold.it/500x325" alt="Article Image" />
+              <img
+                class="card-img-top"
+                v-bind:src="portfolio.cryptos[0].crypto_image"
+                alt="Article Image"
+                height="300"
+              />
               <div class="card-body">
                 <h5 class="card-title">{{ portfolio.cryptos[0].crypto_name }}</h5>
                 <p class="card-text">Count {{ crypto.count }}</p>

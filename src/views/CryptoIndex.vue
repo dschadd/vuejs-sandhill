@@ -1,13 +1,9 @@
 <template>
   <div class="crypto-index">
     <div class="row">
-      <div v-for="crypto in cryptos" class="col-md-4 mt-2">
+      <div v-for="crypto in cryptos" class="col-md-4 mt-4">
         <div class="card border-secondary">
-          <img
-            class="card-img-top"
-            src="https://image.freepik.com/free-icon/apple-logo_318-40184.jpg"
-            alt="Crypto logo"
-          />
+          <img class="card-img-top" v-bind:src="crypto.image" alt="Crypto logo" height="300" />
           <div class="card-body">
             <h5 class="card-title">{{ crypto.name }}</h5>
             <a v-bind:href="`/#/cryptos/${crypto.id}`" class="btn btn-secondary">Visit Crypto Page</a>

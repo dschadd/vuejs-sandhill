@@ -33,19 +33,17 @@
     </div>
 
     <div class="row">
-      <div v-for="company in user.companies" class="col-md-4 mt-4">
-        <img class="card-img-top" src="http://placehold.it/500x325" alt="Article Image" />
+      <div v-for="company in user.companies" class="col-md-4 mt-4 border">
+        <img class="card-img-top border" v-bind:src="company.company_image" alt="Company Logo" height="300" />
         <div class="card-body">
           <h5 class="card-title">{{ company.company_name }}</h5>
-          <p class="card-text">Test</p>
           <a v-bind:href="`/#/companies/${company.company_id}`" class="btn btn-secondary">Keep Reading</a>
         </div>
       </div>
-      <div v-for="crypto in user.cryptos" class="col-md-4 mt-4">
-        <img class="card-img-top" src="http://placehold.it/500x325" alt="Article Image" />
+      <div v-for="crypto in user.cryptos" class="col-md-4 mt-4 border">
+        <img class="card-img-top border" v-bind:src="crypto.crypto_image" alt="Article Image" height="300" />
         <div class="card-body">
           <h5 class="card-title">{{ crypto.crypto_name }}</h5>
-          <p class="card-text">Test</p>
           <a v-bind:href="`/#/cryptos/${crypto.crypto_id}`" class="btn btn-secondary">Keep Reading</a>
         </div>
       </div>
