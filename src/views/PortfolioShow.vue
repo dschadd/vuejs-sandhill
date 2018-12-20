@@ -1,25 +1,44 @@
 <template>
   <div class="portfolio-show">
-    <canvas id="portfolio" width="200" height="200"></canvas>
-
-    <div v-for="company in portfolio.companies[0].portfolio_data">
-      <div v-if="company.portfolio_id === portfolio_id">
-        <div>{{ portfolio.companies[0].company_name }}</div>
-
-        <p>{{ company.shares }}</p>
-        <p>{{ company.purchase_price }}</p>
-      </div>
+    <div v-if="portfolio.loading" class="container">
+      <img src="https://cdn-images-1.medium.com/max/1600/0*cWpsf9D3g346Va20.gif" alt="" />
     </div>
+    <div v-else class="container">
+      <h1 class="mt-2">{{ portfolio.name }}</h1>
+      <div class="row">
+        <div class="col-md-4 mt-4"><canvas id="portfolio" width="200" height="200"></canvas></div>
 
-    <div v-for="crypto in portfolio.cryptos[0].portfolio_data">
-      <div v-if="crypto.portfolio_id === portfolio_id">
-        <p>{{ portfolio.cryptos[0].crypto_name }}</p>
-        <p>{{ crypto.count }}</p>
-        <p>{{ crypto.purchase_price }}</p>
+        <div class="col-md-4 mt-4">
+          <div v-for="company in portfolio.companies[0].portfolio_data">
+            <div v-if="company.portfolio_id === portfolio_id">
+              <img class="card-img-top" src="http://placehold.it/500x325" alt="Article Image" />
+              <div class="card-body">
+                <h5 class="card-title">{{ portfolio.companies[0].company_name }}</h5>
+                <p class="card-text">Shares: {{ company.shares }}</p>
+                <p class="card-text">Purchase price: {{ company.purchase_price }}</p>
+                <a v-bind:href="`/#/companies/${company.company_id}`" class="btn btn-secondary">Visit Company Page</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mt-4">
+          <div v-for="crypto in portfolio.cryptos[0].portfolio_data">
+            <div v-if="crypto.portfolio_id === portfolio_id">
+              <img class="card-img-top" src="http://placehold.it/500x325" alt="Article Image" />
+              <div class="card-body">
+                <h5 class="card-title">{{ portfolio.cryptos[0].crypto_name }}</h5>
+                <p class="card-text">Count {{ crypto.count }}</p>
+                <p class="card-text">Count {{ crypto.purchase_price }}</p>
+                <a v-bind:href="`/#/cryptos/${crypto.crypto_id}`" class="btn btn-secondary">Visit Crypto Page</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <p>{{ portfolio.initial_cash }}</p>
+      <h1>Initial Cash: {{ portfolio.initial_cash }}</h1>
+    </div>
   </div>
 </template>
 
@@ -32,7 +51,7 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      portfolio: {},
+      portfolio: { loading: true },
       portfolio_id: "",
       companyAssets: "",
       cryptoAssets: "",
@@ -68,7 +87,8 @@ export default {
         data: {
           datasets: [
             {
-              data: [10, 20, 30]
+              data: [10, 20, 30],
+              backgroundColor: ["rgba(210, 180, 140, 1)", "rgba(139, 69, 19, 1)"]
             }
           ],
           labels: ["Ethereum", "Tesla", "Cash"]
